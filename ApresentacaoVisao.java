@@ -24,9 +24,14 @@ public class ApresentacaoVisao extends JFrame
         super("Tela de Boas Vindas");
 
         JPanel painelNorte = new JPanel();
-        JLabel lbImagem = new JLabel(new ImageIcon("image/images.jpg"));
+        ImageIcon iconOriginal = new ImageIcon("image/apresentacao.png");
+        Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+
+        JLabel lbImagem = new JLabel(iconRedimensionado);
+
         painelNorte.add(lbImagem);
-        getContentPane().add(painelNorte , BorderLayout.NORTH);
+        getContentPane().add(painelNorte, BorderLayout.NORTH);
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
         

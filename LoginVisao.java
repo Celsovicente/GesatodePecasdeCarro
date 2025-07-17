@@ -24,7 +24,7 @@ public class LoginVisao extends JFrame
 
         JPanel painelNorte = new JPanel();
 
-        ImageIcon iconOriginal = new ImageIcon("image/logoVeterinario.png");
+        ImageIcon iconOriginal = new ImageIcon("image/login.png");
         Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
 
