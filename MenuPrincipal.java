@@ -148,9 +148,7 @@ public class MenuPrincipal extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent event)
     {
-        if(event.getSource() == novaPecaItem)
-            JOptionPane.showMessageDialog(null, "Nova Peca");
-        else if(event.getSource() == novoFornecedorItem)
+        if(event.getSource() == novoFornecedorItem)
             new FornecedorVisao(false, new FornecedorModelo());
         else if(event.getSource() == editarFornecedorItem)
             new EditarFornecedor();
@@ -160,6 +158,16 @@ public class MenuPrincipal extends JFrame implements ActionListener
             FornecedorFile.listarFornecedores();
         else if(event.getSource() == pesquisarFornecedorItem)
             new PesquisarFornecedor();
+        else if(event.getSource() == novaPecaItem)
+            new PecaVisao(false, new PecaModelo());
+        else if(event.getSource() == editarPecaItem)
+            new EditarPeca();
+        else if(event.getSource() == eliminarPecaItem)
+            new EliminarPeca();
+        else if(event.getSource() == pesquisarPecaItem)
+            new PesquisarPeca();
+        else if(event.getSource() == listarPecaItem)
+            PecaFile.listarPecas();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == categoriaItem)

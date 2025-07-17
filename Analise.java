@@ -35,7 +35,7 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
     String modeloAutomovel        // (de ModelosAutomoveis.tab)
     String localizacao            // (de Localizacao.tab)
     FornecedorModelo fornecedor   // Relação direta com FornecedorModelo
-    double preco
+    float preco
     int quantidade
     String disponibilidade
     boolean status
