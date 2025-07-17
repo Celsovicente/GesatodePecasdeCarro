@@ -43,7 +43,7 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
 - FornecedorModelo
     int id
     String nome
-    String telefone
+    String telefone.
     String email
     String contatoResponsavel
     String nacionalidade
