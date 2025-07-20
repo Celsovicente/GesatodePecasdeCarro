@@ -141,7 +141,6 @@ public class VendaFile extends ObjectsFile
                         modelo.getPreco(),
                         modelo.getNomeCliente(),
                         modelo.getTelefoneCliente(),
-                        modelo.getTelefoneCliente(),
                         modelo.getNomeFuncionario(),
                         modelo.getTipoPagamento(),
                         modelo.getCondicaoVenda(),

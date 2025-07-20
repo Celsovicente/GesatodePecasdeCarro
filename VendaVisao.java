@@ -207,10 +207,10 @@ public class VendaVisao extends JFrame
             return Integer.parseInt(quantidadeJTF.getText().trim());
         }
 
-        public float getPreco()
-        {
-            return Float.parseFloat(precoUnitarioJTF.getText().trim());
-        }
+       public float getPreco()
+       {
+            return Float.parseFloat(precoUnitarioJTF.getText().trim().replace(",", "."));
+       }
 
         public String getNomeCliente()
         {
@@ -244,7 +244,7 @@ public class VendaVisao extends JFrame
 
         public float getTotalVenda()
         {
-            return Float.parseFloat(totalvendaJTF.getText().trim());
+            return Float.parseFloat(totalvendaJTF.getText().trim().replace(",", "."));
         }
 
         // metodos setters
@@ -328,27 +328,24 @@ public class VendaVisao extends JFrame
         public void calcular()
         {
             String qtidadeStr = quantidadeJTF.getText().trim();
-            String precoStr = precoUnitarioJTF.getText().trim();
+            String precoStr = precoUnitarioJTF.getText().trim().replace(",", ".");
 
-            if(!qtidadeStr.isEmpty() && !precoStr.isEmpty())
-            {
-                try
-                {
+            if (!qtidadeStr.isEmpty() && !precoStr.isEmpty()) {
+                try {
                     int quantidade = Integer.parseInt(qtidadeStr);
                     float preco = Float.parseFloat(precoStr);
                     float total = quantidade * preco;
+
+                    // Garante que sempre apareça com ponto decimal
                     totalvendaJTF.setText(String.format("%.2f", total));
-                }
-                catch(NumberFormatException e)
-                {
+                } catch(NumberFormatException e) {
                     totalvendaJTF.setText("");
                 }
-            }
-            else
-            {
+            } else {
                 totalvendaJTF.setText("");
             }
         }
+
 
         // metod salvar
         public void salvar()
