@@ -20,7 +20,6 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
 - PecaVisao
 - FornecedorVisao
 - VendaVisao
-- ConsultaStockVisao
 */
 
 /*
@@ -29,12 +28,12 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
     int id
     String nome
     String referencia
-    String categoria               // (de CategoriaPeca.tab)
-    String estado                 // (de EstadoPeca.tab: Nova, Usada, etc.)
-    String marcaAutomovel         // (de MarcasAutomoveis.tab)
-    String modeloAutomovel        // (de ModelosAutomoveis.tab)
-    String localizacao            // (de Localizacao.tab)
-    FornecedorModelo fornecedor   // Relação direta com FornecedorModelo
+    String categoria              
+    String estado                 
+    String marcaAutomovel         
+    String modeloAutomovel        
+    String localizacao            
+    FornecedorModelo fornecedor   
     float preco
     int quantidade
     String disponibilidade
@@ -53,16 +52,17 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
 
 - VendaPecaModelo
     int id
-    PecaModelo peca                   // Relação direta com PecaModelo
-    String dataVenda
+    PecaModelo peca                   
     int quantidade
     double precoUnitario
-    double totalVenda                 // Calculado: precoUnitario * quantidade
     String nomeCliente
     String telefoneCliente
     String nomeFuncionario
-    String tipoPagamento              // (de TiposPagamento.tab)
-    String condicaoVenda              // (de CondicoesVenda.tab)
+    String tipoPagamento             
+    String condicaoVenda             
+    String dataVenda
+    double totalVenda                 
+    boolean status
 
 
 4. Ficheiros (Persistência de Dados)
@@ -72,24 +72,29 @@ o registo de fornecedores, vendas e consulta da localização das peças dentro 
 
 
 5. Tabelas de Apoio (Entidades Fracas usadas como atributos)
-- CategoriaPeca.tab          → atributo: categoria
-- EstadoPeca.tab             → atributo: estado
-- MarcasAutomoveis.tab       → atributo: marcaAutomovel
-- ModelosAutomoveis.tab      → atributo: modeloAutomovel
-- Localizacao.tab            → atributo: localizacao
-- TiposPagamento.tab         → atributo: tipoPagamento
-- CondicoesVenda.tab         → atributo: condicaoVenda
+- CategoriaPeca.tab          
+- EstadoPeca.tab             
+- MarcasAutomoveis.tab       
+- ModelosAutomoveis.tab      
+- Localizacao.tab            
+- TiposPagamento.tab         
+- CondicoesVenda.tab         
 - Nacionalidades.tab
 - Municipios.tab
 - Comunas.tab
+- NomeFuncionario.tab
 
 6. Listagens e Pesquisas
 
 - Listagem geral de Peças
-- Pesquisa de Peça por Nome ou Referência
-- Consulta de Stock por Categoria ou Localização
+- Pesquisa de Peça por Id 
+- Pesquisa de Peça por Referência
 - Listagem de Fornecedores
-- Histórico de Vendas por Peça ou Cliente
+- Pesquisa de Forncedores por Id
+- Pesquisa de Fornecedores por Nome
+- Listagem de Vendas 
+- Pesquisa de Venda por Id
+- Pesquisa de Venda por Nome do Cliente
 
 7. Diversos
 7.1 - Implementação: Java com Swing

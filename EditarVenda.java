@@ -2,8 +2,8 @@
 Tema: Gestão de Peças Auto
 Nome: Emanuel F. Shekiná
 Número: 2817
-Ficheiro: EliminarPeca.java
-Data: 17.07.2025
+Ficheiro: EditarVenda.java
+Data: 20.07.2025
 --------------------------------------*/
 import javax.swing.*;
 import java.awt.event.*;
@@ -12,14 +12,14 @@ import SwingComponents.*;
 import Calendario.*;
 import javax.swing.UIManager.*;
 
-public class EliminarPeca extends JFrame
+public class EditarVenda extends JFrame
 {
     private PainelCentro centro;
     private PainelSul sul;
     
-    public EliminarPeca()
+    public EditarVenda()
     {
-        super("Pesquisas das Pecas Para Eliminacao");
+        super("Pesquisas da Venda Para Edicao");
 
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
@@ -31,9 +31,10 @@ public class EliminarPeca extends JFrame
 
     class PainelCentro extends JPanel implements ActionListener
     {
+
         private JTextField  idJTF;
-        private JComboBox referenciaJCB;
-        private JRadioButton pesquisarPorId, pesquisarPorRefencia;
+        private JComboBox nomeJCB;
+        private JRadioButton pesquisarPorId, pesquisarPorNome;
         private ButtonGroup grupo;
     
         public PainelCentro()
@@ -43,21 +44,21 @@ public class EliminarPeca extends JFrame
             grupo = new ButtonGroup();
 
             add(pesquisarPorId = new JRadioButton("Pesquisa Por Id"));
-            add(pesquisarPorRefencia = new JRadioButton("Pesquisa Por Referencia"));
+            add(pesquisarPorNome = new JRadioButton("Pesquisa Por Nome"));
 
             grupo.add(pesquisarPorId);
-            grupo.add(pesquisarPorRefencia);
+            grupo.add(pesquisarPorNome);
             
             add(new JLabel("Digite o Id Procurado"));
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
             
-            add(new JLabel("Escolha a Referencia Procurado"));
-            add(referenciaJCB = new JComboBox(PecaFile.getAllReferencias()));
-            referenciaJCB.setEnabled(false);
+            add(new JLabel("Escolha o Nome do Cliente Procurado"));
+            add(nomeJCB = new JComboBox(VendaFile.getAllNomesClientes()));
+            nomeJCB.setEnabled(false);
             
             pesquisarPorId.addActionListener(this);
-            pesquisarPorRefencia.addActionListener(this);
+            pesquisarPorNome.addActionListener(this);
         }
 
         public int getIdProcurado() 
@@ -65,9 +66,9 @@ public class EliminarPeca extends JFrame
             return Integer.parseInt(idJTF.getText().trim());
         }
 
-        public String getReferenciaProcurada()
+        public String getNomeProcurado()
         {
-            return String.valueOf(referenciaJCB.getSelectedItem());
+            return String.valueOf(nomeJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -83,12 +84,12 @@ public class EliminarPeca extends JFrame
             if(event.getSource() == pesquisarPorId)
             {
                 idJTF.setEnabled(true);
-                referenciaJCB.setEnabled(false);
+                nomeJCB.setEnabled(false);
             }
-            else if(event.getSource() == pesquisarPorRefencia)
+            else if(event.getSource() == pesquisarPorNome)
             {
                 idJTF.setEnabled(false);
-                referenciaJCB.setEnabled(true);
+                nomeJCB.setEnabled(true);
             }
         }
     }
@@ -109,45 +110,17 @@ public class EliminarPeca extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == pesquisarJB)
-            {    
-                PecaModelo modelo;
+            {   
+                VendaModelo modelo; 
                 if(centro.getTipoPesquisa() == 1)
-                {
-                    modelo = PecaFile.getPesquisaPorId(centro.getIdProcurado());
-                    
-                    JOptionPane.showMessageDialog(null, modelo.toString());
-
-                    int opcao = JOptionPane.showConfirmDialog(null, "Tem a certeza que deseja eliminar esse dado?");
-
-                    if(opcao == JOptionPane.YES_OPTION)
-                    {
-                        // eliminar dados
-                        modelo.setStatus(false);
-
-                        new PecaFile().eliminarDados(modelo);
-                        dispose();
-                    }
-                    else    
-                        JOptionPane.showMessageDialog(null, "Operacao Interrompida por ordem do operador");
+                {    
+                    modelo = VendaFile.getPesquisaPorId(centro.getIdProcurado());
+                    new VendaVisao(true, modelo);
                 }
                 else if(centro.getTipoPesquisa() == 2)
                 {
-                    modelo = PecaFile.getPesquisarPorRefencia(centro.getReferenciaProcurada());
-                    
-                    JOptionPane.showMessageDialog(null, modelo.toString());
-
-                    int opcao = JOptionPane.showConfirmDialog(null, "Tem a certeza que deseja eliminar esse dado?");
-
-                    if(opcao == JOptionPane.YES_OPTION)
-                    {
-                        // eliminar dados
-                        modelo.setStatus(false);
-
-                        new PecaFile().eliminarDados(modelo);
-                        dispose();
-                    }
-                    else    
-                        JOptionPane.showMessageDialog(null, "Operacao Interrompida por ordem do operador");
+                    modelo = VendaFile.getPesquisarPorNomeCliente(centro.getNomeProcurado());
+                    new VendaVisao(true, modelo);
                 }
             }
             else 

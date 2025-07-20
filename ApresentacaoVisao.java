@@ -78,7 +78,6 @@ public class ApresentacaoVisao extends JFrame
                         sul.ativarBotao(false);
             }
     }
-
     
     class PainelSul extends JPanel implements ActionListener
     {

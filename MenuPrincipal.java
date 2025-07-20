@@ -23,7 +23,8 @@ public class MenuPrincipal extends JFrame implements ActionListener
     private JMenuItem listarPecaItem, pesquisarPecaItem, listarVendaItem, pesquisarVendaItem, 
     listarFornecedorItem, pesquisarFornecedorItem;
     private JMenuItem categoriaItem, estadoPecaItem, marcasAutomoveisItem, tipoPagamentoItem, localizacaoItem,
-    condicaoVendaItem, modeloAutomovelItem, nacionalidadeItem, provinciaItem, municipioItem, comunaItem;
+    condicaoVendaItem, modeloAutomovelItem, nacionalidadeItem, provinciaItem, municipioItem, comunaItem,
+    nomeFuncionarioItem;
 
 	public MenuPrincipal(String user)
 	{
@@ -107,6 +108,7 @@ public class MenuPrincipal extends JFrame implements ActionListener
         menuTabela.add(provinciaItem = new JMenuItem("Provincia"));
         menuTabela.add(municipioItem = new JMenuItem("Municipio"));
         menuTabela.add(comunaItem = new JMenuItem("Comuna"));
+        menuTabela.add(nomeFuncionarioItem = new JMenuItem("Nome do Funcionario"));
 
         // adiconando os eventos nos elementos do menuPecas
         novaPecaItem.addActionListener(this);
@@ -144,6 +146,7 @@ public class MenuPrincipal extends JFrame implements ActionListener
         provinciaItem.addActionListener(this);
         municipioItem.addActionListener(this);
         comunaItem.addActionListener(this);
+        nomeFuncionarioItem.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent event)
@@ -168,6 +171,16 @@ public class MenuPrincipal extends JFrame implements ActionListener
             new PesquisarPeca();
         else if(event.getSource() == listarPecaItem)
             PecaFile.listarPecas();
+        else if(event.getSource() == novaVendaItem)
+            new VendaVisao(false, new VendaModelo());
+        else if(event.getSource() == editarVendaItem)
+            new EditarVenda();
+        else if(event.getSource() == eliminarVendaItem)
+            new EliminarVenda();
+        else if(event.getSource() == pesquisarVendaItem)
+            new PesquisarVenda();
+        else if(event.getSource() == listarVendaItem)
+            VendaFile.listarVendas();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == categoriaItem)
@@ -176,6 +189,8 @@ public class MenuPrincipal extends JFrame implements ActionListener
             Tabela2.editarNovosItems("EstadoPeca.tab", "Novo Estado da Peca");
         else if(event.getSource() == localizacaoItem)
             Tabela2.editarNovosItems("Localizacao.tab", "Nova Localizacao");
+        else if(event.getSource() == nomeFuncionarioItem)
+            Tabela2.editarNovosItems("NomeFuncionario.tab", "Novo Nome do Funcionario");
         else if(event.getSource() == tipoPagamentoItem)
             Tabela2.editarNovosItems("TiposPagamento.tab", "Novo Tipo de Pagamento");
         else if(event.getSource() == condicaoVendaItem)

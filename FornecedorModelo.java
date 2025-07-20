@@ -164,7 +164,6 @@ public class FornecedorModelo implements RegistGeneric
         dados += "Provincia: " + getProvincia() + "\n";
         dados += "Municipio: " + getMunicipio() + "\n";
         dados += "Comuna: " + getComuna() + "\n";
-
         dados += "Estado: " + getStatus() + "\n";
  
         return dados;

@@ -21,7 +21,7 @@ public class PecaVisao extends JFrame
 
     public PecaVisao(boolean alterar, PecaModelo modelo)
     {
-        super("Peca Visao");
+        super("Registrar Peca");
         
         editar = alterar;
 
