@@ -2,7 +2,7 @@
 Tema: Gestão de Peças Auto
 Nome: Emanuel F. Shekiná
 Número: 35217
-Ficheiro: FornecedorVisao.java
+Ficheiro: DefesaModelo.java
 Data: 16.07.2025
 --------------------------------------*/
 import javax.swing.*;
@@ -13,14 +13,15 @@ import Calendario.*;
 import javax.swing.UIManager.*;
 import java.io.*;
 
-public class FornecedorModelo implements RegistGeneric
+public class DefesaModelo implements RegistGeneric
 {
     private int id;
     private StringBufferModelo nome, telefone, email, contatoResponsavel, nacionalidade, 
-    provincia, comuna, municipio;
+    provincia, comuna, municipio, conferencia, diocese, paroquia;
+    private DataModelo dataFundacao;
     private boolean status;
 
-    public FornecedorModelo()
+    public DefesaModelo()
     {
         id = 0;
         nome = new StringBufferModelo("", 20);
@@ -31,11 +32,16 @@ public class FornecedorModelo implements RegistGeneric
         provincia = new StringBufferModelo("", 20);
         municipio = new StringBufferModelo("", 20);
         comuna = new StringBufferModelo("", 20);
+        conferencia = new StringBufferModelo("", 20);
+        diocese = new StringBufferModelo("", 20);
+        paroquia = new StringBufferModelo("", 20);
+        dataFundacao = new DataModelo();
         status = false;
     }
 
-    public FornecedorModelo(int id, String nome, String telefone, String email, String contatoResponsavel,
-    String nacionalidade, String provincia, String municipio, String comuna, boolean status)
+    public DefesaModelo(int id, String nome, String telefone, String email, String contatoResponsavel,
+    String nacionalidade, String provincia, String municipio, String comuna, String conferencia, 
+    String diocese, String paroquia, String dataFundacao,boolean status)
     {
         this.id = id;
         this.nome = new StringBufferModelo(nome, 20);
@@ -46,6 +52,10 @@ public class FornecedorModelo implements RegistGeneric
         this.provincia = new StringBufferModelo(provincia, 20);
         this.municipio = new StringBufferModelo(municipio, 20);
         this.comuna = new StringBufferModelo(comuna, 20);
+        this.conferencia = new StringBufferModelo(conferencia, 20);
+        this.diocese = new StringBufferModelo(diocese, 20);
+        this.paroquia = new StringBufferModelo(paroquia, 20);
+        this.dataFundacao = new DataModelo(dataFundacao);
         this.status = status;
     }   
 
@@ -93,6 +103,26 @@ public class FornecedorModelo implements RegistGeneric
     public String getComuna()
     {
         return comuna.toStringEliminatingSpaces();
+    }
+
+    public String getConferencia()
+    {
+        return conferencia.toStringEliminatingSpaces();
+    }
+
+    public String getDiocese()
+    {
+        return diocese.toStringEliminatingSpaces();
+    }
+
+    public String getParoquia()
+    {
+        return paroquia.toStringEliminatingSpaces();
+    }
+
+    public String getDataFundacao()
+    {
+        return dataFundacao.toString();
     }
 
     public boolean getStatus()
@@ -146,6 +176,26 @@ public class FornecedorModelo implements RegistGeneric
         this.comuna = new StringBufferModelo(comuna, 20);
     }
 
+    public void setConferencia(String conferencia)
+    {
+        this.conferencia = new StringBufferModelo(conferencia, 20);
+    }
+
+    public void setDiocese(String diocese)
+    {
+        this.diocese = new StringBufferModelo(diocese, 20);
+    }
+
+    public void setParoquia(String paroquia)
+    {
+        this.paroquia = new StringBufferModelo(paroquia, 20);
+    }
+
+    public void setDataFundacao(String dataFundacao)
+    {
+        this.dataFundacao = new DataModelo(dataFundacao);
+    }
+
     public void setStatus(boolean status)
     {
         this.status = status;
@@ -154,7 +204,7 @@ public class FornecedorModelo implements RegistGeneric
     // metodo toString
     public String toString()
     {
-        String dados = "Dados do Fornecedor: \n\n";
+        String dados = "Dados da Defesa: \n\n";
         dados += "Id: " + getId() + "\n";
         dados += "Nome: " + getNome() + "\n";
         dados += "Telefone: " + getTelefone() + "\n";
@@ -164,6 +214,10 @@ public class FornecedorModelo implements RegistGeneric
         dados += "Provincia: " + getProvincia() + "\n";
         dados += "Municipio: " + getMunicipio() + "\n";
         dados += "Comuna: " + getComuna() + "\n";
+        dados += "Conferencia: " + getConferencia() + "\n";
+        dados += "Diocese: " + getDiocese() + "\n";
+        dados += "Paroquia: " + getParoquia() + "\n";
+        dados += "Data de Fundacao: " + getDataFundacao() + "\n";
         dados += "Estado: " + getStatus() + "\n";
  
         return dados;
@@ -174,7 +228,7 @@ public class FornecedorModelo implements RegistGeneric
     {
         try
         {
-            return 160 * 2 + 4 + 1;
+            return 220 * 2 + 4 + 12 + 1;
         }
         catch(Exception ex)
         {
@@ -196,6 +250,10 @@ public class FornecedorModelo implements RegistGeneric
             provincia.write(stream);
             municipio.write(stream);
             comuna.write(stream);
+            conferencia.write(stream);
+            diocese.write(stream);
+            paroquia.write(stream);
+            dataFundacao.write(stream);
             stream.writeBoolean(status);
         }
         catch(Exception ex)
@@ -219,6 +277,10 @@ public class FornecedorModelo implements RegistGeneric
             provincia.read(stream);
             municipio.read(stream);
             comuna.read(stream);
+            conferencia.read(stream);
+            diocese.read(stream);
+            paroquia.read(stream);
+            dataFundacao.read(stream);
             status = stream.readBoolean();
         }
         catch(Exception ex)
@@ -230,13 +292,7 @@ public class FornecedorModelo implements RegistGeneric
 
     public void salvar()
     {
-        FornecedorFile file = new FornecedorFile();
+        DefesaFile file = new DefesaFile();
         file.salvarDados(this);
-    }
-
-    public void salvarDados()
-    {
-        FornecedorFile file = new FornecedorFile();
-        file.alterarDados(this);
     }
 }

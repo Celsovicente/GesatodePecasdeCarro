@@ -1,7 +1,7 @@
 /*------------------------------------
 Tema: Gestão de Peças Auto
 Nome: Emanuel F. Shekiná
-Número: 2817
+Número: 35217
 Ficheiro: LoginVisao.java
 Data: 17.07.2025
 --------------------------------------*/
@@ -46,7 +46,7 @@ public class LoginVisao extends JFrame
     {
         private JTextField userJTF;
         private JPasswordField passwordJTF;
-        private String correctUser = "2817", correctPassword = "ucan";
+        private String correctUser = "35217", correctPassword = "ucan";
 
         public PainelCentro()
         {

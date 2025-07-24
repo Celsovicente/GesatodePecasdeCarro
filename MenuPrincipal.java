@@ -1,7 +1,7 @@
 /*------------------------------------
 Tema: Gestão de Peças Auto
 Nome: Emanuel F. Shekiná
-Número: 2817
+Número: 35217
 Ficheiro: Analise.java
 Data: 16.07.2025
 --------------------------------------*/
@@ -16,15 +16,16 @@ import Calendario.*;
 public class MenuPrincipal extends JFrame implements ActionListener
 {
     private JMenuBar menuBar;
-    private JMenu menuFornecedor, menuVenda, menuPeca, menuListagem, menuAjuda, menuTabela;
+    private JMenu menuFornecedor, menuVenda, menuPeca, menuListagem, menuAjuda, menuTabela, menuDefesa;
     private JMenuItem novoFornecedorItem, editarFornecedorItem, eliminarFornecedorItem, sairFornecedorItem;
     private JMenuItem novaVendaItem, editarVendaItem, eliminarVendaItem, sairVendaItem;
     private JMenuItem novaPecaItem, editarPecaItem, eliminarPecaItem, sairPecaItem;
     private JMenuItem listarPecaItem, pesquisarPecaItem, listarVendaItem, pesquisarVendaItem, 
     listarFornecedorItem, pesquisarFornecedorItem;
+    private JMenuItem novaDefesaItem, listarDefesaItem, pesquisarDefesaItem;
     private JMenuItem categoriaItem, estadoPecaItem, marcasAutomoveisItem, tipoPagamentoItem, localizacaoItem,
     condicaoVendaItem, modeloAutomovelItem, nacionalidadeItem, provinciaItem, municipioItem, comunaItem,
-    nomeFuncionarioItem;
+    nomeFuncionarioItem, conferencia, diocese, paroquia;
 
 	public MenuPrincipal(String user)
 	{
@@ -61,6 +62,8 @@ public class MenuPrincipal extends JFrame implements ActionListener
         menuBar.add(menuAjuda = new JMenu("AJuda"));
         menuAjuda.setMnemonic('A');
         menuAjuda.setIcon(new ImageIcon("image/help.png"));
+        menuBar.add(menuDefesa = new JMenu("Defesa"));
+        menuDefesa.setMnemonic('D');
 
         // instanciando os elementos do menuPecas
         menuPeca.add(novaPecaItem = new JMenuItem("Nova Peca", new ImageIcon("image/novo24.png")));
@@ -95,6 +98,8 @@ public class MenuPrincipal extends JFrame implements ActionListener
         menuListagem.addSeparator();
         menuListagem.add(listarVendaItem = new JMenuItem("Listar Vendas"));
         menuListagem.add(pesquisarVendaItem = new JMenuItem("Pesquisar Vendas"));
+        menuListagem.addSeparator();
+        menuListagem.add(listarDefesaItem = new JMenuItem("Listar Defesas"));
 
         // instanciando os elementos do menuTabela
         menuTabela.add(categoriaItem = new JMenuItem("Categoria"));
@@ -109,6 +114,14 @@ public class MenuPrincipal extends JFrame implements ActionListener
         menuTabela.add(municipioItem = new JMenuItem("Municipio"));
         menuTabela.add(comunaItem = new JMenuItem("Comuna"));
         menuTabela.add(nomeFuncionarioItem = new JMenuItem("Nome do Funcionario"));
+        menuTabela.add(conferencia = new JMenuItem("Conferencia"));
+        menuTabela.add(diocese = new JMenuItem("Diocese"));
+        menuTabela.add(paroquia = new JMenuItem("Paroquia"));
+
+        // instanciando os elementos do menu Defesa
+        menuDefesa.add(novaDefesaItem = new JMenuItem("Nova Defesa"));
+        menuDefesa.addSeparator();
+        menuDefesa.add(pesquisarDefesaItem = new JMenuItem("Pesquisar Defesa"));
 
         // adiconando os eventos nos elementos do menuPecas
         novaPecaItem.addActionListener(this);
@@ -147,6 +160,14 @@ public class MenuPrincipal extends JFrame implements ActionListener
         municipioItem.addActionListener(this);
         comunaItem.addActionListener(this);
         nomeFuncionarioItem.addActionListener(this);
+        conferencia.addActionListener(this);
+        diocese.addActionListener(this);
+        paroquia.addActionListener(this);
+
+        // adicionando evento aos elementos do menu defesa
+        novaDefesaItem.addActionListener(this);
+        pesquisarDefesaItem.addActionListener(this);
+        listarDefesaItem.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent event)
@@ -181,6 +202,12 @@ public class MenuPrincipal extends JFrame implements ActionListener
             new PesquisarVenda();
         else if(event.getSource() == listarVendaItem)
             VendaFile.listarVendas();
+        else if(event.getSource() == novaDefesaItem)
+            new DefesaVisao();
+        else if(event.getSource() == pesquisarDefesaItem)
+            new PesquisarDefesa();
+        else if(event.getSource() == listarDefesaItem)
+            DefesaFile.listarDefesa();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == categoriaItem)
@@ -209,6 +236,14 @@ public class MenuPrincipal extends JFrame implements ActionListener
         else if(event.getSource() == comunaItem)
             Tabela3_3.editarNovosItems("Provincias.tab", "Municipios.tab", "Comunas.tab", "Provincia", 
             "Municipio", "Comuna", "Nova Comuna");
+        else if(event.getSource() == conferencia)
+            Tabela2.editarNovosItems("Conferencia.tab", "Nova Conferencia");
+        else if(event.getSource() == diocese)
+            Tabela3_2.editarNovosItems("Conferencia.tab","Diocese.tab", "Conferencia", "Diocese", 
+            "Nova Diocese");
+        else if(event.getSource() == paroquia)
+            Tabela3_3.editarNovosItems("Conferencia.tab", "Diocese.tab", "Paroquia.tab", 
+            "Conferencia", "Diocese", "Paroquia", "Nova Paroquia");
         else if(event.getSource() == sairFornecedorItem)
             dispose();
         else if(event.getSource() == sairFornecedorItem)
