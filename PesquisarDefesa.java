@@ -34,20 +34,22 @@ public class PesquisarDefesa extends JFrame
         private JTextFieldData dataFundacaoJTF;
         private JComboBox conferenciaJCB, dioceseJCB, paroquiaJCB;
         private JRadioButton pesquisarConferencia, pesquisarDiocese, pesquisarParoquia, pesquisarData;
+        private JComboBoxTabela3_Tabela3 confereDioceseParoquia;
         private ButtonGroup grupo;
 
         public PainelCentro()
         {
             setLayout(new GridLayout(4 , 2));
+            confereDioceseParoquia = new JComboBoxTabela3_Tabela3("Conferencia.tab", "Diocese.tab", "Paroquia.tab"); 
             
             add(new JLabel("Escolha a Conferencia Procurada"));
-            add(conferenciaJCB = new JComboBox(DefesaFile.getAllConferencia()));
+            add(conferenciaJCB = confereDioceseParoquia.getComboBoxFather());
             
             add(new JLabel("Escolha a Diocese Procurada"));
-            add(dioceseJCB = new JComboBox(DefesaFile.getAllDiocese()));
+            add(dioceseJCB = confereDioceseParoquia.getComboBoxSun());
 
             add(new JLabel("Escolha Paroquia Procurada"));
-            add(paroquiaJCB = new JComboBox(DefesaFile.getAllParoquia()));
+            add(paroquiaJCB = confereDioceseParoquia.getComboBoxNeto());
 
             add(new JLabel("Data de Fundacao:"));
             dataFundacaoJTF = new JTextFieldData("Data?");
